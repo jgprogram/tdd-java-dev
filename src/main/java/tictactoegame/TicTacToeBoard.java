@@ -3,12 +3,26 @@ package tictactoegame;
 public class TicTacToeBoard {
 
     private final TicTacToeMark[][] marks;
+    private Player nextPlayer = Player.X;
 
     public TicTacToeBoard() {
         marks = new TicTacToeMark[2][2];
     }
 
-    public void markSpace(TicTacToeMark mark, int x, int y) {
+    public Player nextPlayer() {
+        return nextPlayer;
+    }
+
+    public void play(Player player, int x, int y) {
+        if (!player.equals(nextPlayer)) {
+            throw new RuntimeException("Next player should be " + nextPlayer.toString());
+        }
+
+        markSpace(player.mark(), x, y);
+        nextPlayer = player.equals(Player.O) ? Player.X : Player.O;
+    }
+
+    private void markSpace(TicTacToeMark mark, int x, int y) {
         checkAxisX(x);
         checkAxisY(y);
 
