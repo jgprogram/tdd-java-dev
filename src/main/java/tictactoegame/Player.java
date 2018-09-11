@@ -2,15 +2,15 @@ package tictactoegame;
 
 public enum Player {
 
-    X(TicTacToeMark.x()), O(TicTacToeMark.o());
+    X(Mark.X), O(Mark.O);
 
-    private final TicTacToeMark mark;
+    private final Mark mark;
 
-    Player(TicTacToeMark mark) {
+    Player(Mark mark) {
         this.mark = mark;
     }
 
-    public TicTacToeMark mark() {
+    public Mark mark() {
         return mark;
     }
 }

@@ -56,4 +56,59 @@ public class TicTacToeSpec {
 
         assertEquals(Player.X, ticTacToeBoard.nextPlayer());
     }
+
+    @Test
+    public void whenPlayerXPlacedTheirMarksInOneRowThenHeWin() {
+        ticTacToeBoard.play(Player.X, 1, 1);
+        ticTacToeBoard.play(Player.O, 1, 2);
+        ticTacToeBoard.play(Player.X, 2, 1);
+        ticTacToeBoard.play(Player.O, 2, 2);
+
+        boolean gameOver = ticTacToeBoard.play(Player.X, 3, 1);
+        Player winner = ticTacToeBoard.winner();
+
+        assertTrue(gameOver);
+        assertEquals(winner, Player.X);
+    }
+
+    @Test
+    public void whenPlayerOPlacedTheirMarksInOneColThenHeWin() {
+        ticTacToeBoard.play(Player.X, 1, 1);
+        ticTacToeBoard.play(Player.O, 2, 1);
+        ticTacToeBoard.play(Player.X, 3, 2);
+        ticTacToeBoard.play(Player.O, 2, 2);
+        ticTacToeBoard.play(Player.X, 3, 3);
+
+        boolean gameOver = ticTacToeBoard.play(Player.O, 2, 3);
+        Player winner = ticTacToeBoard.winner();
+
+        assertTrue(gameOver);
+        assertEquals(winner, Player.O);
+    }
+
+    @Test
+    public void whenPlayerXPlacedTheirMarksDiagonalThenHeWin() {
+        ticTacToeBoard.play(Player.X, 1, 1);
+        ticTacToeBoard.play(Player.O, 1, 2);
+        ticTacToeBoard.play(Player.X, 2, 2);
+        ticTacToeBoard.play(Player.O, 3, 2);
+
+        boolean gameOver = ticTacToeBoard.play(Player.X, 3, 3);
+        Player winner = ticTacToeBoard.winner();
+
+        assertTrue(gameOver);
+        assertEquals(winner, Player.X);
+    }
+
+    @Test
+    public void whenThereIsNoWinnerGameIsNotOver() {
+        ticTacToeBoard.play(Player.X, 2, 2);
+        ticTacToeBoard.play(Player.O, 3, 2);
+
+        boolean gameOver = ticTacToeBoard.play(Player.X, 3, 3);
+        Player winner = ticTacToeBoard.winner();
+
+        assertFalse(gameOver);
+        assertNull(winner);
+    }
 }
