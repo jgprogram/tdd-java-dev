@@ -101,6 +101,20 @@ public class TicTacToeSpec {
     }
 
     @Test
+    public void whenPlayerXPlacedTheirMarksDiagonal2ThenHeWin() {
+        ticTacToeBoard.play(Player.X, 3, 1);
+        ticTacToeBoard.play(Player.O, 1, 2);
+        ticTacToeBoard.play(Player.X, 2, 2);
+        ticTacToeBoard.play(Player.O, 3, 2);
+
+        boolean gameOver = ticTacToeBoard.play(Player.X, 1, 3);
+        Player winner = ticTacToeBoard.winner();
+
+        assertTrue(gameOver);
+        assertEquals(winner, Player.X);
+    }
+
+    @Test
     public void whenThereIsNoWinnerGameIsNotOver() {
         ticTacToeBoard.play(Player.X, 2, 2);
         ticTacToeBoard.play(Player.O, 3, 2);
