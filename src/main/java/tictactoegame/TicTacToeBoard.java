@@ -29,19 +29,34 @@ public class TicTacToeBoard {
         markSpace(player.mark(), x, y);
         nextPlayer = player.equals(Player.O) ? Player.X : Player.O;
 
-        if (isGameOver()) {
+        if (isWinningFigureOnBoard()) {
             winner = player;
+            gameOver = true;
+        } else if (isDraw()) {
+            winner = null;
             gameOver = true;
         }
 
         return gameOver;
     }
 
-    private boolean isGameOver() {
+    private boolean isWinningFigureOnBoard() {
         return isWinningFigureInColumn()
                 || isWinningFigureInRow()
                 || isWinningFigureInDiagonalRow1()
                 || isWinningFigureInDiagonalRow2();
+    }
+
+    private boolean isDraw() {
+        for (int i = 0; i < marks.length; i++) {
+            for (int j = 0; j < marks[i].length; j++) {
+                if (marks[i][j] == null) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     private boolean isWinningFigureInDiagonalRow1() {

@@ -111,4 +111,22 @@ public class TicTacToeSpec {
         assertFalse(gameOver);
         assertNull(winner);
     }
+
+    @Test
+    public void whenAllSpacesAreMarkedAndNoWinnerThereIsDraw() {
+        ticTacToeBoard.play(Player.X, 1,1);
+        ticTacToeBoard.play(Player.O, 2,2);
+        ticTacToeBoard.play(Player.X, 3,1);
+        ticTacToeBoard.play(Player.O, 1,3);
+        ticTacToeBoard.play(Player.X, 1,2);
+        ticTacToeBoard.play(Player.O, 2,1);
+        ticTacToeBoard.play(Player.X, 3,2);
+        ticTacToeBoard.play(Player.O, 3,3);
+
+        boolean gameOver = ticTacToeBoard.play(Player.X, 2,3);
+        Player winner = ticTacToeBoard.winner();
+
+        assertNull(winner);
+        assertTrue(gameOver);
+    }
 }
